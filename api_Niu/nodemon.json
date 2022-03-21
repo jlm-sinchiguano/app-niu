@@ -1,0 +1,11 @@
+{
+    "watch": [
+        "controllers",
+        "models"
+    ],
+    "ext": "ts",
+    "ignore": [
+        "./.spec.ts"
+    ],
+    "exec":"ts-node ./server.ts"
+}
