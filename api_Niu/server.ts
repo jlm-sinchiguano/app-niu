@@ -6,7 +6,7 @@ var session = require('express-session');
 import passport from 'passport';
 import {companyController} from './controllers/company';
 import { userController } from './controllers/user';
-import {} from './controllers/auth';
+import  {isAuthenticated, isClientAuthenticated } from './controllers/auth';
 const oauth2Controller = require('./controllers/oauth2');
 import { clientController } from './controllers/client';
 
@@ -45,36 +45,36 @@ var router = express.Router();
 
 // Create endpoint handlers for /companies
 router.route('/companies')
-  .post(authController.isAuthenticated, companyController.postCompanies)
-  .get(authController.isAuthenticated, companyController.getCompanies);
+  .post(isAuthenticated, companyController.postCompanies)
+  .get(isAuthenticated, companyController.getCompanies);
 
 // Create endpoint handlers for /companies/:company_id
 router.route('/companies/:company_id')
-  .get(authController.isAuthenticated, companyController.getCompany)
-  .put(authController.isAuthenticated, companyController.putCompany)
-  .delete(authController.isAuthenticated, companyController.deleteCompany);
+  .get(isAuthenticated, companyController.getCompany)
+  .put(isAuthenticated, companyController.putCompany)
+  .delete(isAuthenticated, companyController.deleteCompany);
 
 // Create endpoint handlers for /users
 router.route('/users')
   .post(userController.postUsers)
-  .get(authController.isAuthenticated, userController.getUsers);
+  .get(isAuthenticated, userController.getUsers);
 
 // Create endpoint handlers for /clients
 router.route('/clients')
-  .post(authController.isAuthenticated, clientController.postClients)
-  .get(authController.isAuthenticated, clientController.getClients);
+  .post(isAuthenticated, clientController.postClients)
+  .get(isAuthenticated, clientController.getClients);
 
 // Create endpoint handlers for oauth2 authorize
 router.route('/oauth2/authorize')
-  .get(authController.isAuthenticated, oauth2Controller.authorization)
-  .post(authController.isAuthenticated, oauth2Controller.decision);
+  .get(isAuthenticated, oauth2Controller.authorization)
+  .post(isAuthenticated, oauth2Controller.decision);
 
 // Create endpoint handlers for oauth2 token
 router.route('/oauth2/token')
-  .post(authController.isClientAuthenticated, oauth2Controller.token);
+  .post(isClientAuthenticated, oauth2Controller.token);
 
 // Register all our routes with /api
 app.use('/api', router);
 
 // Start the server
-app.listen(3000);
+app.listen(6000);

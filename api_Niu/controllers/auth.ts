@@ -6,9 +6,7 @@ import User from '../models/user';
 import Client from '../models/client';
 import Token from '../models/token';
 
-class AuthController {
-  
-}
+
 passport.use(new BasicStrategy(
   function(username, password, callback) {
     User.findOne({ username: username }, function (err:any, user:any) {
@@ -66,10 +64,10 @@ passport.use(new Strategy(
   }
 ));
 
-//exports.isAuthenticated = passport.authenticate(['basic', 'bearer'], { session : false });
-//exports.isClientAuthenticated = passport.authenticate('client-basic', { session : false });
-//exports.isBearerAuthenticated = passport.authenticate('bearer', { session: false });
 export const isAuthenticated = passport.authenticate(['basic', 'bearer'], { session : false });
+export const isClientAuthenticated = passport.authenticate('client-basic', { session : false });
+export const isBearerAuthenticated = passport.authenticate('bearer', { session: false });
+
 
 
 
