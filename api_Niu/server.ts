@@ -1,5 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import cors from 'cors';
 var bodyParser = require('body-parser');
 var ejs = require('ejs');
 var session = require('express-session');
@@ -19,7 +20,7 @@ mongoose.connect('mongodb://localhost:27017/apiNiulocker',{
 });
 
 // Create our Express application
-var app = express();
+const app = express();
 
 // Set view engine to ejs
 app.set('view engine', 'ejs');
@@ -39,6 +40,8 @@ app.use(session({
 
 // Use the passport package in our application
 app.use(passport.initialize());
+
+app.use(cors());
 
 // Create our Express router
 var router = express.Router();
@@ -77,4 +80,4 @@ router.route('/oauth2/token')
 app.use('/api', router);
 
 // Start the server
-app.listen(6000);
+app.listen(3000);
